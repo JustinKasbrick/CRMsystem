@@ -4,9 +4,9 @@ using System.Text;
 
 namespace CRMsystem
 {
-    public static class MessageBus
+    public class MessageBus
     {
-        public static void SendEmailChangedMessage(int UserId, string newEmail)
+        public void SendEmailChangedMessage(int UserId, string newEmail)
         {
 
         }
