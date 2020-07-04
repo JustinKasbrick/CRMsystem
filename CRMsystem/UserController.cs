@@ -12,9 +12,7 @@ namespace CRMsystem
         public void ChangeEmail(int userId, string newEmail)
         {
             object[] data = _database.GetUserById(userId);
-            string email = (string)data[1];
-            UserType type = (UserType)data[2];
-            var user = new User(userId, email, type);
+            var user = UserFactory.Create(data);
 
             object[] companyData = _database.GetCompany();
             string companyDomainName = (string)companyData[0];
