@@ -19,6 +19,9 @@ namespace CRMsystem
 
         public int ChangeEmail(string newEmail, string companyDomainName, int numberOfEmployees)
         {
+            if (Email == newEmail)
+                return numberOfEmployees;
+
             string emailDomain = newEmail.Split('@')[1];
             bool isEmailCorporate = emailDomain == companyDomainName;
             UserType newType = isEmailCorporate
