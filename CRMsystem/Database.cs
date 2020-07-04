@@ -16,7 +16,7 @@ namespace CRMsystem
             return new object[] { "iqmetrix.com", 2 };
         }
 
-        public void SaveCompany(int newNumber)
+        public void SaveCompany(Company company)
         {
 
         }

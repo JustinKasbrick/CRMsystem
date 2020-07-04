@@ -17,14 +17,12 @@ namespace CRMsystem
             Type = type;
         }
 
-        public int ChangeEmail(string newEmail, string companyDomainName, int numberOfEmployees)
+        public void ChangeEmail(string newEmail, Company company)
         {
             if (Email == newEmail)
-                return numberOfEmployees;
+                return;
 
-            string emailDomain = newEmail.Split('@')[1];
-            bool isEmailCorporate = emailDomain == companyDomainName;
-            UserType newType = isEmailCorporate
+            UserType newType = company.IsEmailCorporate(newEmail)
                 ? UserType.Employee
                 : UserType.Customer;
 
@@ -32,13 +30,11 @@ namespace CRMsystem
             if (Type != newType)
             {
                 int delta = newType == UserType.Employee ? 1 : -1;
-                numberOfEmployees = numberOfEmployees + delta;
+                company.ChangeNumberOfEmployees(delta);
             }
 
             Email = newEmail;
             Type = newType;
-
-            return numberOfEmployees;
         }
     }
 

@@ -11,16 +11,15 @@ namespace CRMsystem
 
         public void ChangeEmail(int userId, string newEmail)
         {
-            object[] data = _database.GetUserById(userId);
-            var user = UserFactory.Create(data);
+            object[] userData = _database.GetUserById(userId);
+            var user = UserFactory.Create(userData);
 
             object[] companyData = _database.GetCompany();
-            string companyDomainName = (string)companyData[0];
-            int numberOfEmployees = (int)companyData[1];
+            var company = CompanyFactory.Create(companyData);
 
-            int newNumberOfEmployees = user.ChangeEmail(newEmail, companyDomainName, numberOfEmployees);
+            user.ChangeEmail(newEmail, company);
 
-            _database.SaveCompany(newNumberOfEmployees);
+            _database.SaveCompany(company);
             _database.SaveUser(user);
             _messageBus.SendEmailChangedMessage(userId, newEmail);
         }
